@@ -17,10 +17,24 @@ export class Prefabs extends Component {
     private timeWidget: Prefab;
 
     @property(Prefab)
+    private heartsWidget: Prefab;
+
+    @property(Prefab)
     private bucketWidget: Prefab;
+
+    @property(Prefab)
+    private seriesWidget: Prefab;
 
     public getDefaultBackgroundSpriteFrame(): SpriteFrame {
         return this.backgrounds[0];
+    }
+
+    public getHeartsWidget(): Prefab {
+        return this.heartsWidget;
+    }
+
+    public getSeriesWidget(): Prefab {
+        return this.seriesWidget;
     }
 
     public getTimeWidget(): Prefab {

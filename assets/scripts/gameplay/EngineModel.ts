@@ -8,5 +8,7 @@ export class EngineModel {
     public entities: EntityFactory;
     public layers: ViewLayers;
     public pointsPerFruit: number;
+    public heartsPerGame: number;
+    public seriesBonus: number;
 
 }

@@ -1,4 +1,5 @@
 import { System } from "db://assets/scripts/gameplay/systems/System";
+import { FruitMissedEventInfo } from "db://assets/scripts/gameplay/entity/EntityInfo";
 
 /**
  *  Система удаляет сущности фрукты, которые находятся ниже границы.
@@ -12,7 +13,9 @@ export class FruitWasteSystem extends System {
             if (it.view.node.position.y <= this.threshold) {
                 this.engine.remove(it);
                 this.model.layers.fruits.removeChild(it.view.node);
-                this.engine.emitEvent("fruitMissed");
+                this.engine.emitEvent("fruitMissed", {
+                    fruit: it
+                } as FruitMissedEventInfo);
             }
         });
     }

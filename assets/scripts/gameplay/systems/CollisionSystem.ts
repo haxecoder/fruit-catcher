@@ -1,7 +1,7 @@
 import { System } from "db://assets/scripts/gameplay/systems/System";
 import { Entity } from "db://assets/scripts/gameplay/entity/Entity";
 import { BoxCollider2D, Intersection2D, PolygonCollider2D } from "cc";
-import { FruitCaughtInfo, FruitInfo } from "db://assets/scripts/gameplay/entity/EntityInfo";
+import { FruitCaughtEventInfo, FruitInfo } from "db://assets/scripts/gameplay/entity/EntityInfo";
 import { EventType } from "db://assets/scripts/gameplay/entity/EventType";
 
 /**
@@ -39,7 +39,7 @@ export class CollisionSystem extends System {
                 info.isMovable = false;
 
                 const eventType: EventType = info.isDangerous ? "dangerousCaught" : "fruitCaught";
-                this.engine.emitEvent(eventType, { fruit: it } as FruitCaughtInfo);
+                this.engine.emitEvent(eventType, { fruit: it } as FruitCaughtEventInfo);
             }
         });
     }

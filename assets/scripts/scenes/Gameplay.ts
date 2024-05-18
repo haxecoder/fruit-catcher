@@ -5,7 +5,7 @@ import { Engine } from "db://assets/scripts/gameplay/Engine";
 import { EngineModel } from "db://assets/scripts/gameplay/EngineModel";
 import { EntityFactory } from "db://assets/scripts/gameplay/entity/EntityFactory";
 
-const { ccclass, property } = _decorator;
+const { ccclass} = _decorator;
 
 @ccclass('Gameplay')
 export class Gameplay extends Component {
@@ -14,7 +14,12 @@ export class Gameplay extends Component {
 
     protected override start() {
         this.engine = this.createEngine();
-        const model = this.createEngineModel(this.engine);
+
+        const model = this.createEngineModel(
+            this.node.getComponent(Prefabs),
+            this.node.getComponent(ViewLayers)
+        );
+
         this.engine.init(model);
         this.engine.start(this.onGameOver);
     }
@@ -23,13 +28,15 @@ export class Gameplay extends Component {
         this.engine.update(dt);
     }
 
-    private createEngineModel(engine: Engine): EngineModel {
+    private createEngineModel(prefabs: Prefabs, layers: ViewLayers): EngineModel {
         const it = new EngineModel();
 
-        it.prefabs = this.node.getComponent(Prefabs);
-        it.layers = this.node.getComponent(ViewLayers);
-        it.entities = new EntityFactory(it, engine);
+        it.prefabs = prefabs;
+        it.layers = layers;
+        it.entities = new EntityFactory();
         it.pointsPerFruit = 50;
+        it.heartsPerGame = 5;
+        it.seriesBonus = 10;
 
         return it;
     }

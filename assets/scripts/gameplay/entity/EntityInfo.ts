@@ -6,11 +6,15 @@ import { Entity } from "db://assets/scripts/gameplay/entity/Entity";
 export type FruitInfo = {
     isCollected: boolean;
     isMovable: boolean;
-    isDangerous: boolean;
+    isDangerous?: boolean;
     move: BaseMove;
 }
 
-export type FruitCaughtInfo = {
+export type FruitCaughtEventInfo = {
+    fruit: Entity;
+}
+
+export type FruitMissedEventInfo = {
     fruit: Entity;
 }
 
