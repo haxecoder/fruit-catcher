@@ -2,6 +2,7 @@ import { System } from "db://assets/scripts/gameplay/systems/System";
 import { Entity } from "db://assets/scripts/gameplay/entity/Entity";
 import { BoxCollider2D, Intersection2D, PolygonCollider2D } from "cc";
 import { FruitCaughtInfo, FruitInfo } from "db://assets/scripts/gameplay/entity/EntityInfo";
+import { EventType } from "db://assets/scripts/gameplay/entity/EventType";
 
 /**
  *  Система отвечает за обнаружение коллизий между коллайдером корзины и коллайдерами сущностей фруктов.
@@ -36,7 +37,9 @@ export class CollisionSystem extends System {
             if (Intersection2D.polygonPolygon(bucketPoints, fruitPoints)) {
                 info.isCollected = true;
                 info.isMovable = false;
-                this.engine.emitEvent("fruitCaught", { fruit: it } as FruitCaughtInfo);
+
+                const eventType: EventType = info.isDangerous ? "dangerousCaught" : "fruitCaught";
+                this.engine.emitEvent(eventType, { fruit: it } as FruitCaughtInfo);
             }
         });
     }

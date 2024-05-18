@@ -45,6 +45,7 @@ export class FruitSpawnSystem extends System {
         const xPos = Math.floor(Math.random() * this.fieldWidth);
         node.setPosition(new Vec3(xPos, 0));
         (entity.info as FruitInfo).move.updateStartPositionX(xPos);
+        (entity.info as FruitInfo).isDangerous = info.isDangerous || false;
 
         node.angle = Math.floor(Math.random() * 360);
 

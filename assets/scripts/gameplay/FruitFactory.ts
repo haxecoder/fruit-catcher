@@ -6,12 +6,11 @@ import { instantiate, Prefab, Node, Vec3, UITransform } from "cc";
 export class FruitFactory implements IFruitGenerator {
 
     private strategies: Map<FruitFactoryState, () => Node> = new Map<FruitFactoryState, () => Node>();
-    private currentStrategy: FruitFactoryState = "random";
+    private currentStrategy: FruitFactoryState = "randomSafe";
 
     constructor(protected prefabs: Prefabs) {
-        this.strategies.set("random", this.generateRandom.bind(this));
-        this.strategies.set("redOnly", this.generateRed.bind(this));
-        this.strategies.set("yellowBananasOnly", this.generateYellowBananas.bind(this));
+        this.strategies.set("randomSafe", this.generateRandom.bind(this));
+        this.strategies.set("dangerousObjects", this.generateDangerousObjects.bind(this));
     }
 
     public setState(state: FruitFactoryState) {
@@ -29,16 +28,12 @@ export class FruitFactory implements IFruitGenerator {
         return node;
     }
 
-    private generateYellowBananas(): Node {
-        return this.getRandomFruitPrefabInstanceFrom(this.prefabs.getYellowBananasFruits());
+    private generateDangerousObjects(): Node {
+        return this.getRandomFruitPrefabInstanceFrom(this.prefabs.getDangerousObjects());
     }
 
     private generateRandom(): Node {
-        return this.getRandomFruitPrefabInstanceFrom(this.prefabs.getAllFruits());
-    }
-
-    private generateRed(): Node {
-        return this.getRandomFruitPrefabInstanceFrom(this.prefabs.getRedFruits());
+        return this.getRandomFruitPrefabInstanceFrom(this.prefabs.getAllSafeFruits());
     }
 
     private getRandomFruitPrefabInstanceFrom(it: Prefab[]): Node {

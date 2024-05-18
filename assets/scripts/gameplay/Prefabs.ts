@@ -31,8 +31,12 @@ export class Prefabs extends Component {
         return this.pointsWidget;
     }
 
-    public getAllFruits(): Prefab[] {
-        return this.fruits;
+    public getAllSafeFruits(): Prefab[] {
+        return [
+            this.fruits[0],
+            this.fruits[1],
+            this.fruits[2]
+        ];
     }
 
     public getYellowBananasFruits(): Prefab[] {
@@ -42,6 +46,13 @@ export class Prefabs extends Component {
     public getRedFruits(): Prefab[] {
         return [
             this.fruits[1], // blackberry red
+        ];
+    }
+
+    public getDangerousObjects(): Prefab[] {
+        return [
+            this.fruits[3],
+            this.fruits[4]
         ];
     }
 

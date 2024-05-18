@@ -6,6 +6,7 @@ import { Entity } from "db://assets/scripts/gameplay/entity/Entity";
 export type FruitInfo = {
     isCollected: boolean;
     isMovable: boolean;
+    isDangerous: boolean;
     move: BaseMove;
 }
 
@@ -17,4 +18,5 @@ export type SpawnFruitEventInfo = {
     fruitType: FruitFactoryState;
     moveType: FruitMoveType;
     speed: number;
+    isDangerous?: boolean;
 };

@@ -779,6 +779,14 @@
       {
         "__uuid__": "0ad3da48-a802-425b-a1e1-80a142208e4f",
         "__expectedType__": "cc.Prefab"
+      },
+      {
+        "__uuid__": "e8ee5ed1-f6f4-4735-b256-4717549d00d6",
+        "__expectedType__": "cc.Prefab"
+      },
+      {
+        "__uuid__": "b0c62149-cd11-4786-87c6-9df65b1ce568",
+        "__expectedType__": "cc.Prefab"
       }
     ],
     "pointsWidget": {

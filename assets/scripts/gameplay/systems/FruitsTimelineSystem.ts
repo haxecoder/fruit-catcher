@@ -9,6 +9,7 @@ type QueueItem = {
     moveType: FruitMoveType;
     speed?: number;
     delay: number;
+    isDangerous?: boolean;
 }
 
 /**
@@ -17,7 +18,6 @@ type QueueItem = {
 export class FruitsTimelineSystem extends System {
 
     private gameStartDelay = 2000;
-    private delayBetweenGeneration = 1000;
 
     private queue: QueueItem[] = [];
 
@@ -49,7 +49,8 @@ export class FruitsTimelineSystem extends System {
         this.engine.emitEvent("spawnFruit", {
             moveType: next.moveType,
             fruitType: next.fruitType,
-            speed: next.speed
+            speed: next.speed,
+            isDangerous: next.isDangerous
         } as SpawnFruitEventInfo);
 
         delay(next.delay).then(() => this.spawnFruit());
@@ -61,34 +62,32 @@ export class FruitsTimelineSystem extends System {
     }
 
     private createPatterns() {
-        this.patterns.push(
-            [
-                { fruitType: "random", moveType: "linear", speed: 8, delay: 500 },
-                { fruitType: "random", moveType: "linear", speed: 8, delay: 500 },
-                { fruitType: "random", moveType: "linear", speed: 25, delay: 1300 }
-            ]
-        );
+        this.patterns.push([
+            { fruitType: "randomSafe", moveType: "linear", speed: 8, delay: 500 },
+            { fruitType: "randomSafe", moveType: "linear", speed: 8, delay: 500 },
+            { fruitType: "randomSafe", moveType: "linearSpeedSine", speed: 8, delay: 800 },
+            { fruitType: "randomSafe", moveType: "linear", speed: 25, delay: 1300 },
+            { fruitType: "dangerousObjects", moveType: "linear", speed: 10, delay: 900, isDangerous: true },
+        ]);
 
-        this.patterns.push(
-            [
-                { fruitType: "random", moveType: "linear", speed: 8, delay: 1500 },
-                { fruitType: "random", moveType: "linearSpeedSine", speed: 8, delay: 800 },
-                { fruitType: "random", moveType: "linear", speed: 15, delay: 700 },
-                { fruitType: "random", moveType: "randomSpeedLinear", delay: 1400 },
-                { fruitType: "random", moveType: "randomSpeedLinear", delay: 1400 },
-                { fruitType: "random", moveType: "randomSpeedLinear", delay: 1400 }
-            ]
-        );
+        this.patterns.push([
+            { fruitType: "randomSafe", moveType: "linear", speed: 8, delay: 1500 },
+            { fruitType: "randomSafe", moveType: "linearSpeedSine", speed: 8, delay: 800 },
+            { fruitType: "randomSafe", moveType: "linear", speed: 15, delay: 700 },
+            { fruitType: "randomSafe", moveType: "randomSpeedLinear", delay: 1400 },
+            { fruitType: "randomSafe", moveType: "randomSpeedLinear", delay: 1400 },
+            { fruitType: "randomSafe", moveType: "randomSpeedLinear", delay: 1400 },
+            { fruitType: "dangerousObjects", moveType: "linear", speed: 10, delay: 900, isDangerous: true },
+        ]);
 
-
-        this.patterns.push(
-            [
-                { fruitType: "random", moveType: "linearSpeedSine", speed: 8, delay: 900 },
-                { fruitType: "random", moveType: "linearSpeedSine", speed: 8, delay: 100 },
-                { fruitType: "random", moveType: "linearSpeedSine", speed: 8, delay: 200 },
-                { fruitType: "random", moveType: "linearSpeedSine", speed: 8, delay: 300 }
-            ]
-        );
+        this.patterns.push([
+            { fruitType: "randomSafe", moveType: "linear", speed: 8, delay: 900 },
+            { fruitType: "randomSafe", moveType: "linear", speed: 10, delay: 300 },
+            { fruitType: "randomSafe", moveType: "linearSpeedSine", speed: 8, delay: 800 },
+            { fruitType: "randomSafe", moveType: "linear", speed: 12, delay: 600 },
+            { fruitType: "randomSafe", moveType: "linear", speed: 14, delay: 900 },
+            { fruitType: "dangerousObjects", moveType: "linear", speed: 16, delay: 900, isDangerous: true },
+        ]);
     }
 
 }
